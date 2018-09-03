@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.cell.*?> 
+<?import javafx.collections.*?> 
+<?import javafx.geometry.Insets?>
+<?import Model.*?>
+
+<AnchorPane fx:id="apnRoot" 
+            prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" 
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddModifyProductController">
+    <stylesheets>
+        <URL value="@Styles.css"/>
+    </stylesheets>
+    <HBox spacing="10">
+        <VBox spacing="10">
+            <Label fx:id="lblTitle" styleClass="appTitle" >
+                <padding>
+                    <Insets bottom="30.0" left="50.0" right="15.0" top="60.0" />
+                </padding>
+            </Label>
+            <GridPane vgap="10" hgap="10">
+                <padding>
+                    <Insets bottom="15.0" left="50.0" right="15.0" top="15.0" />
+                </padding>
+                <Label 
+                    text="ID" prefHeight="30"
+                    GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <Label 
+                    text="Name" prefHeight="30"
+                    GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <Label 
+                    text="Inv" prefHeight="30"
+                    GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <Label 
+                    text="Price" prefHeight="30"
+                    GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <Label 
+                    text="Min" prefHeight="30"
+                    GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                
+                <TextField fx:id="txtProductID"
+                    prefWidth="200" prefHeight="30" disable="true"
+                    GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                <TextField fx:id="txtName"
+                    prefWidth="200" prefHeight="30" onKeyReleased="#checkCanSave"
+                    GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                <TextField fx:id="txtInStock"
+                    prefWidth="100" prefHeight="30" onKeyReleased="#checkCanSave"
+                    GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                <TextField fx:id="txtPrice"
+                    prefWidth="100" prefHeight="30" onKeyReleased="#checkCanSave"
+                    GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                <HBox spacing="10" GridPane.rowIndex="4" GridPane.columnIndex="1">
+                    <TextField fx:id="txtMin"
+                        prefWidth="100" prefHeight="30" onKeyReleased="#checkCanSave"/>
+                    <Label text="Max" prefHeight="30"/>
+                    <TextField fx:id="txtMax"
+                        prefWidth="100" prefHeight="30" onKeyReleased="#checkCanSave"/>
+                </HBox>
+            </GridPane>
+        </VBox>
+        <GridPane>
+            <HBox spacing="10"
+                GridPane.rowIndex="0">
+                <padding>
+                    <Insets bottom="15.0" left="180.0" right="0.0" top="60.0" />
+                </padding>
+                <Button fx:id="btnSearch"
+                    text="Search" onAction="#handleSearch" 
+                    prefWidth="100" prefHeight="30" />
+                <TextField fx:id="txtSearch"
+                    prefWidth="200" prefHeight="30" onAction="#handleSearch"
+                    onKeyPressed="#handleSearchKeyPressed"/>
+            </HBox>
+            <TableView fx:id="tblUnusedParts"
+                items="$controller.unusedParts"
+                prefHeight="200"
+                onKeyReleased="#handleUnusedPartTableSelected"
+                onMouseClicked="#handleUnusedPartTableSelected"
+                GridPane.rowIndex="1">
+                <placeholder><Label text=""/></placeholder>
+                <columns>
+                    <TableColumn text="Part ID" prefWidth="150" >
+                        <cellValueFactory>
+                            <PropertyValueFactory property="partID" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Part Name" prefWidth="150">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="name" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Inventory Level" prefWidth="150">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="inStock" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Price/Cost per Unit" prefWidth="150">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="price" />
+                        </cellValueFactory>
+                    </TableColumn>
+                </columns>    
+            </TableView>
+            <Button fx:id="btnAdd"
+                text="Add" onAction="#handleAdd" disable="true"
+                GridPane.rowIndex="2" GridPane.halignment="RIGHT"
+                prefWidth="100" prefHeight="30">
+                <GridPane.margin>
+                    <Insets bottom="30.0" left="0.0" right="15.0" top="15.0" />
+                </GridPane.margin>
+            </Button>
+            <TableView fx:id="tblAssociatedParts"
+                items="$controller.associatedParts"
+                onKeyReleased="#handleAssociatedPartTableSelected"
+                onMouseClicked="#handleAssociatedPartTableSelected"
+                prefHeight="200" GridPane.rowIndex="3">
+                <placeholder><Label text=""/></placeholder>
+                <columns>
+                    <TableColumn text="Part ID" prefWidth="150" >
+                        <cellValueFactory>
+                            <PropertyValueFactory property="partID" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Part Name" prefWidth="150">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="name" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Inventory Level" prefWidth="150">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="inStock" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Price/Cost per Unit" prefWidth="150">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="price" />
+                        </cellValueFactory>
+                    </TableColumn>
+                </columns>    
+            </TableView>
+            <Button fx:id="btnDelete"
+                text="Delete" onAction="#handleDelete" disable="true" 
+                GridPane.rowIndex="4" GridPane.halignment="RIGHT"
+                prefWidth="100" prefHeight="30" >
+                <GridPane.margin>
+                    <Insets bottom="15.0" left="0.0" right="15.0" top="15.0" />
+                </GridPane.margin>
+            </Button>
+            <HBox
+                GridPane.rowIndex="5" alignment="CENTER_RIGHT" spacing="15">
+                <GridPane.margin>
+                    <Insets bottom="15.0" left="0.0" right="15.0" top="0.0" />
+                </GridPane.margin>
+                <Button fx:id="btnSave"
+                    text="Save" onAction="#handleSave" disable="true" 
+                    prefWidth="100" prefHeight="30" />
+                <Button fx:id="btnCancel"
+                    text="Cancel" onAction="#handleCancel"
+                    prefWidth="100" prefHeight="30" />
+            </HBox>
+        </GridPane>
+    </HBox>
+</AnchorPane>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane fx:id="apnRoot" 
+          prefHeight="200.0" prefWidth="350.0" styleClass="mainFxmlClass" 
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddModifyPartController">
+    <stylesheets>
+        <URL value="@Styles.css"/>
+    </stylesheets>
+    <GridPane>
+        <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+        </padding>
+        <HBox spacing="50" GridPane.rowIndex="0">
+            <Label fx:id="lblTitle" 
+                styleClass="appTitle" prefHeight="30"
+                GridPane.rowIndex="0" GridPane.columnIndex="0" />
+<!--            <RadioButton fx:id="rbInhouse"
+                text="In-House" selected="true"
+                onSelectedChange="#handleInHouseRadioButtonSelected">
+                <toggleGroup>
+                    <ToggleGroup fx:id="tgPartType" />
+                </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="rbOutsourced"
+                text="Outsourced" toggleGroup="$tgPartType" 
+                onSelectedChange="#handleOutsourcedRadioButtonSelected"/>-->
+        </HBox>
+        <GridPane vgap="10" hgap="10" GridPane.rowIndex="1">
+            <padding>
+                <Insets bottom="15.0" left="50.0" right="15.0" top="15.0" />
+            </padding>
+            <Label
+                text="Batch" prefHeight="30"
+                GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <Label
+                text="Result" prefHeight="30"
+                GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+<!--            <Label
+                text="Inv" prefHeight="30"
+                GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <Label
+                text="Price/Cost" prefHeight="30"
+                GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+            <Label
+                text="Min" prefHeight="30"
+                GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+            <Label fx:id="lblMachineID"
+                text="Machine ID" prefHeight="30"
+                GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+            <Label fx:id="lblCompanyName"
+                text="Company Name" prefHeight="30"
+                GridPane.rowIndex="5" GridPane.columnIndex="0" visible="false"/>-->
+
+            <TextField fx:id="txtPartID" 
+                prefWidth="200" prefHeight="30" disable="false"
+                GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+            <TextField fx:id="txtName"
+                prefWidth="200" prefHeight="30" onKeyReleased="#checkCanSave"
+                GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+<!--            <TextField fx:id="txtInStock"
+                prefWidth="200" prefHeight="30" onKeyReleased="#checkCanSave"
+                GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+            <TextField fx:id="txtPrice"
+                prefWidth="200" prefHeight="30" onKeyReleased="#checkCanSave"
+                GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+            <HBox spacing="10" GridPane.rowIndex="4" GridPane.columnIndex="1">
+                <TextField fx:id="txtMin"
+                    prefWidth="100" prefHeight="30" onKeyReleased="#checkCanSave" />
+                <Label text="Max" prefHeight="30"/>
+                <TextField fx:id="txtMax"
+                    prefWidth="100" prefHeight="30" onKeyReleased="#checkCanSave" />
+            </HBox>
+            <TextField fx:id="txtMachineID"
+                prefWidth="200" prefHeight="30"
+                GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+            <TextField fx:id="txtCompanyName"
+                prefWidth="200" prefHeight="30" visible="false" onKeyReleased="#checkCanSave"
+                GridPane.rowIndex="5" GridPane.columnIndex="1"/>-->
+        </GridPane>
+        <HBox spacing="10" GridPane.halignment="RIGHT" GridPane.rowIndex="2" alignment="CENTER_RIGHT">
+            <padding>
+                <Insets bottom="0.0" left="0.0" right="15.0" top="0.0" />
+            </padding>
+            <Button 
+                text="Add Result" prefWidth="100" prefHeight="30"/>    
+            <Button fx:id="btnSave"
+                text="Save" onAction="#handleSave" 
+                prefWidth="100" prefHeight="30" />
+            <Button fx:id="btnCancel"
+                text="Cancel" onAction="#handleCancel" 
+                prefWidth="100" prefHeight="30" />
+        </HBox>
+    </GridPane>
+</AnchorPane>

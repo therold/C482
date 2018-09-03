@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.cell.*?> 
+<?import javafx.collections.*?> 
+<?import Model.*?>
+
+<GridPane fx:id="grdRoot"
+    alignment="CENTER" hgap="10.0" vgap="10.0"
+    xmlns:fx="http://javafx.com/fxml"
+    fx:controller="Controller.MainController">
+    <stylesheets>
+        <URL value="@Styles.css"/>
+    </stylesheets>
+    <padding>
+        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+    </padding> 
+    <Label fx:id="lblTitle"
+        styleClass="appTitle" text="Inventory Management System"
+        GridPane.columnIndex="0" GridPane.rowIndex="0">
+        <GridPane.margin>
+            <Insets bottom="30.0" left="0" right="0" top="15.0" />
+        </GridPane.margin>
+    </Label>
+
+     <HBox
+        spacing="10" alignment="CENTER" GridPane.rowIndex="1">
+        
+        <GridPane
+            styleClass="groupWithBorder" vgap="15">
+            <padding>
+                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+            </padding>
+            <Label fx:id="lblPartsTitle"
+                styleClass="title" text="Parts" 
+                GridPane.columnIndex="0" GridPane.halignment="LEFT" />
+            <HBox
+                spacing="10" alignment="CENTER_RIGHT" 
+                GridPane.columnIndex="1" GridPane.halignment="RIGHT">       
+                <Button fx:id="btnPartSearch"
+                    text="Search" onAction="#handlePartsSearchButtonAction" 
+                    prefWidth="100" prefHeight="30"/> 
+                <TextField fx:id="txtPartSearch" prefWidth="200" prefHeight="30"
+                    onAction="#handlePartsSearchButtonAction" 
+                    onKeyPressed="#handlePartsSearchKeyPressed"/>
+            </HBox>
+             <TableView fx:id="tblParts"
+                items="$controller.allParts"
+                onKeyReleased="#handlePartsTableSelected"
+                onMouseClicked="#handlePartsTableSelected"
+                GridPane.columnIndex="0" GridPane.rowIndex="1" 
+                GridPane.columnSpan="2">
+                <placeholder><Label text=""/></placeholder>
+                <columns>
+                    <TableColumn text="Part ID" prefWidth="150" >
+                        <cellValueFactory>
+                            <PropertyValueFactory property="partID" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Part Name" prefWidth="150">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="name" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Inventory Level" prefWidth="150">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="inStock" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Price/Cost per Unit" prefWidth="150">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="price" />
+                        </cellValueFactory>
+                    </TableColumn>
+                </columns>    
+            </TableView>
+            
+            <HBox
+                spacing="10" alignment="CENTER_RIGHT" GridPane.rowIndex="2" 
+                GridPane.columnIndex="1" GridPane.halignment="RIGHT"> 
+                <padding>
+                    <Insets bottom="0" left="0" right="30.0" top="0" />
+                </padding> 
+                <Button fx:id="btnPartAdd" 
+                    text="Add" onAction="#handlePartsAddButtonAction" 
+                    prefWidth="100" prefHeight="30"/> 
+                <Button fx:id="btnPartModify"
+                    text="Modify" onAction="#handlePartsModifyButtonAction" 
+                    disable="true" prefWidth="100" prefHeight="30" />
+                <Button fx:id="btnPartDelete"
+                    text="Delete" onAction="#handlePartsDeleteButtonAction" 
+                    disable="true" prefWidth="100" prefHeight="30" />
+            </HBox>            
+        </GridPane>
+
+        <GridPane
+            vgap="15" styleClass="groupWithBorder">
+            <padding>
+                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+            </padding> 
+            <Label fx:id="lblProductTitle"
+                styleClass="title" text="Products" 
+                GridPane.columnIndex="0" GridPane.halignment="LEFT" />
+            <HBox
+                spacing="10" alignment="CENTER_RIGHT" 
+                GridPane.columnIndex="1" GridPane.halignment="RIGHT"> 
+                <Button fx:id="btnProductSearch"
+                    text="Search" onAction="#handleProductsSearchButtonAction" 
+                    prefWidth="100" prefHeight="30" /> 
+                <TextField fx:id="txtProductSearch" 
+                    prefWidth="200" prefHeight="30" 
+                    onAction="#handleProductsSearchButtonAction" 
+                    onKeyPressed="#handleProductsSearchKeyPressed"/>
+            </HBox>
+            <TableView fx:id="tblProducts"
+                items="$controller.allProducts"
+                onKeyReleased="#handleProductsTableSelected"
+                onMouseClicked="#handleProductsTableSelected"
+                GridPane.columnIndex="0" GridPane.rowIndex="1" 
+                GridPane.columnSpan="2">
+                <placeholder><Label text=""/></placeholder>
+                <columns>
+                    <TableColumn text="Product ID" prefWidth="150">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="productID" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Product Name" prefWidth="150">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="name" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Inventory Level" prefWidth="150">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="inStock" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Price per Unit" prefWidth="150">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="price" />
+                        </cellValueFactory>
+                    </TableColumn>
+                </columns>    
+            </TableView>
+            
+            <HBox
+                spacing="10" alignment="CENTER_RIGHT" GridPane.rowIndex="2"  
+                GridPane.columnIndex="1" GridPane.halignment="RIGHT"> 
+                <padding>
+                    <Insets bottom="0" left="0" right="30.0" top="0" />
+                </padding> 
+                <Button fx:id="btnProductAdd"
+                    text="Add" onAction="#handleProductsAddButtonAction" 
+                    prefWidth="100" prefHeight="30" /> 
+                <Button fx:id="btnProductModify"
+                    text="Modify" onAction="#handleProductsModifyButtonAction" 
+                    disable="true" prefWidth="100" prefHeight="30" />
+                <Button fx:id="btnProductDelete"
+                    text="Delete" onAction="#handleProductsDeleteButtonAction" 
+                    disable="true" prefWidth="100" prefHeight="30" />
+            </HBox>
+        </GridPane>  
+    </HBox>
+    
+    <Button fx:id="btnExit"
+        text="Exit" onAction="#handleExitButtonAction"
+        GridPane.rowIndex="2" GridPane.halignment="RIGHT"
+        prefWidth="100" prefHeight="30" >
+        <GridPane.margin>
+            <Insets top="10" bottom="0" left="0" right="20"/>
+        </GridPane.margin>  
+    </Button>
+</GridPane>
